@@ -31,20 +31,22 @@ function LoginPage() {
 
     try {
       await context.login(userData);
-      if (context.loggedInUser) navigate("/", { replace: true });
-      else {
-        toast({
-          title: "Error loging in",
-          description: "Username or password are incorrect",
-        });
-      }
+      setTimeout(() => {
+        if (localStorage.getItem("jwt-taskify")) {
+          navigate("/", { replace: true });
+        } else {
+          toast({
+            title: "Error logging in",
+            description: "Username or password are incorrect",
+          });
+        }
+      }, 500);
     } catch (err) {
       toast({
         title: "TypeError",
-        description: "Somthing went wrong... please try again",
+        description: "Something went wrong... please try again",
       });
-
-      console.log(err.name);
+      console.log(err);
     }
   }
 

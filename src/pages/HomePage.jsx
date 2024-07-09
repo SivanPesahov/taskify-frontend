@@ -4,22 +4,10 @@ import { LayoutList } from "lucide-react";
 import { CircleUserRound } from "lucide-react";
 import { FilePlus2 } from "lucide-react";
 import { PanelTop } from "lucide-react";
+import useIntersectionShow from "@/utils/observerFunc";
 
 export const HomePage = () => {
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        } else {
-          entry.target.classList.remove("show");
-        }
-      });
-    });
-
-    const hiddennElements = document.querySelectorAll(".hiddenn");
-    hiddennElements.forEach((el) => observer.observe(el));
-  }, []);
+  useIntersectionShow();
 
   return (
     <>

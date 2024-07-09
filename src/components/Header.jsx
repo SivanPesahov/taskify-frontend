@@ -55,7 +55,7 @@ function Header() {
       </div>
 
       <div>
-        <p>Taskify - Your ultimate task management tool</p>
+        <p>Taskify</p>
       </div>
 
       <div className="flex items-center gap-1">

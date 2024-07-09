@@ -1,24 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-
+import React from "react";
+import useIntersectionShow from "@/utils/observerFunc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 
 export const ContactPage = () => {
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        } else {
-          entry.target.classList.remove("show");
-        }
-      });
-    });
+  useIntersectionShow();
+  const { toast } = useToast();
 
-    const hiddennElements = document.querySelectorAll(".hiddenn");
-    hiddennElements.forEach((el) => observer.observe(el));
-  }, []);
+  function handleComment(ev) {
+    ev.preventDefault();
+    toast({
+      title: "Comment sent",
+      duration: 3000,
+    });
+  }
 
   return (
     <div>
@@ -64,7 +61,9 @@ export const ContactPage = () => {
                 <Input placeholder={"body"} className={"h-24"} />
               </div>
 
-              <Button className={"bg-sky-900"}>Send</Button>
+              <Button className={"bg-sky-900"} onClick={handleComment}>
+                Send
+              </Button>
             </form>
           </CardContent>
         </Card>

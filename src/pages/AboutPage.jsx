@@ -1,20 +1,8 @@
 import React, { useEffect } from "react";
+import useIntersectionShow from "@/utils/observerFunc";
 
 export const AboutPage = () => {
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        } else {
-          entry.target.classList.remove("show");
-        }
-      });
-    });
-
-    const hiddennElements = document.querySelectorAll(".hiddenn");
-    hiddennElements.forEach((el) => observer.observe(el));
-  }, []);
+  useIntersectionShow();
 
   return (
     <div>
