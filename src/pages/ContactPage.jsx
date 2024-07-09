@@ -1,12 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "@/services/api.service";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CirclePlus } from "lucide-react";
-import { CircleMinus } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
 
 export const ContactPage = () => {
   useEffect(() => {
