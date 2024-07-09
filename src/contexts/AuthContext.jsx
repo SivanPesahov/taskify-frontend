@@ -37,10 +37,6 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  //   useEffect(() => {
-  //     if (loggedInUser) navigate("/", { replace: true });
-  //   }, [loggedInUser]);
-
   function logout() {
     setToken(null);
     setLoggedInUser(null);

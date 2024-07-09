@@ -10,9 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LogIn } from "lucide-react";
 import AuthContext from "../contexts/AuthContext";
+import { useToast } from "@/components/ui/use-toast";
 
 function RegisterPage() {
   const context = useContext(AuthContext);
@@ -21,6 +22,8 @@ function RegisterPage() {
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const eMailRef = useRef(null);
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   async function handleRegister(ev) {
     ev.preventDefault();
@@ -33,7 +36,32 @@ function RegisterPage() {
       email: eMailRef.current.value,
     };
 
-    await context.register(userData);
+    try {
+      await context.register(userData);
+
+      if (context.loggedInUser) {
+        navigate("/", { replace: true });
+      } else {
+        toast({
+          title: "Error registering",
+          description:
+            "Registration failed, please check your details and try again",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "TypeError",
+        description: "Something went wrong... please try again",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+
+      console.log(err.name);
+    }
   }
 
   return (
@@ -70,13 +98,15 @@ function RegisterPage() {
             <Input ref={eMailRef} placeholder="Enter last name..." />
           </div>
 
-          <Button type="submit">Register</Button>
+          <Button type="submit" className="bg-sky-900">
+            Register
+          </Button>
         </form>
       </CardContent>
       <CardFooter>
         <p className="text-xs">
           Already have an account?{" "}
-          <Link className="underline font-bold" to="/auth/login">
+          <Link className="underline font-bold text-sky-900" to="/auth/login">
             Login
           </Link>
         </p>

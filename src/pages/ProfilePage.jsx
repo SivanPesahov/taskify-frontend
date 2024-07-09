@@ -33,7 +33,7 @@ export const ProfilePage = () => {
   return (
     <div className="flex justify-center items-center ">
       <Card className="shadow-lg w-full max-w-4xl mx-4">
-        <CardHeader className="bg-gray-500">
+        <CardHeader className="bg-sky-900">
           <div className="flex justify-center items-center">
             <Avatar className="h-24 w-24 flex items-center justify-center text-center">
               {/* <AvatarImage src={context.loggedInUser.imgUrl} /> */}

@@ -3,6 +3,9 @@ import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import { AboutPage } from "./pages/AboutPage";
+import { ContactPage } from "./pages/ContactPage";
+import { HomePage } from "./pages/HomePage";
 import { CreateTaskPage } from "./pages/CreateTaskPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { EditTaskPage } from "./pages/EditTaskPage";
@@ -45,10 +48,10 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<div>home</div>} />
+            <Route index element={<HomePage />} />
             <Route path="profile" element={<ProfilePage />} />
-            <Route path="about" element={<div>about</div>} />
-            <Route path="contact" element={<div>contact</div>} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="contact" element={<ContactPage />} />
             <Route path="create" element={<CreateTaskPage />} />
             <Route path="/Tasks">
               <Route path="List" element={<TasksPage />}>

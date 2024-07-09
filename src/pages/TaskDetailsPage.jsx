@@ -19,10 +19,13 @@ import {
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { useToast } from "@/components/ui/use-toast";
+
 export const TaskDetailsPage = () => {
   const { taskId } = useParams();
   const [task, setTask] = useState({});
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     async function getTask() {
@@ -34,16 +37,31 @@ export const TaskDetailsPage = () => {
       }
     }
     getTask();
-  }, []);
+  }, [location.pathname]);
 
   async function handleDelete(ev) {
     ev.preventDefault();
 
     try {
       const { data } = await api.delete("/task/" + taskId);
-      alert("task deleted successfuly");
+
+      toast({
+        title: "Task Deleted",
+        description: "The task has been successfully deleted.",
+        status: "success",
+        duration: 3000,
+      });
+
       navigate("/Tasks/List");
     } catch (err) {
+      toast({
+        title: "Error",
+        description:
+          "Something went wrong while deleting the task. Please try again later.",
+        status: "error",
+        duration: 3000,
+      });
+
       console.log(err);
     }
   }
@@ -54,7 +72,7 @@ export const TaskDetailsPage = () => {
   }
 
   const handleClose = () => {
-    navigate(-1);
+    navigate("/Tasks/List");
   };
 
   return (
@@ -99,11 +117,13 @@ export const TaskDetailsPage = () => {
                   </ul>
                 </div>
 
-                <Button onClick={handleEdit}>Edit</Button>
+                <Button onClick={handleEdit} className={"bg-sky-900"}>
+                  Edit
+                </Button>
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button>Remove</Button>
+                    <Button className={"bg-sky-900"}>Remove</Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>

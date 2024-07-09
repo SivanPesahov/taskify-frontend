@@ -13,12 +13,14 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { LogIn } from "lucide-react";
 import AuthContext from "../contexts/AuthContext";
+import { useToast } from "@/components/ui/use-toast";
 
 function LoginPage() {
   const context = useContext(AuthContext);
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   async function handleLogin(ev) {
     ev.preventDefault();
@@ -27,8 +29,23 @@ function LoginPage() {
       password: passwordRef.current.value,
     };
 
-    await context.login(userData);
-    if (context.loggedInUser) navigate("/", { replace: true });
+    try {
+      await context.login(userData);
+      if (context.loggedInUser) navigate("/", { replace: true });
+      else {
+        toast({
+          title: "Error loging in",
+          description: "Username or password are incorrect",
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "TypeError",
+        description: "Somthing went wrong... please try again",
+      });
+
+      console.log(err.name);
+    }
   }
 
   return (
@@ -53,13 +70,18 @@ function LoginPage() {
             />
           </div>
 
-          <Button type="submit">Login</Button>
+          <Button type="submit" className="bg-sky-900">
+            Login
+          </Button>
         </form>
       </CardContent>
       <CardFooter>
         <p className="text-xs">
           Dont have an account?{" "}
-          <Link className="underline font-bold" to="/auth/register">
+          <Link
+            className="underline font-bold text-sky-900"
+            to="/auth/register"
+          >
             Register
           </Link>
         </p>

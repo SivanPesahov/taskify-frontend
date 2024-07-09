@@ -24,35 +24,39 @@ function Header() {
 
   return (
     <header className="bg-white/5 px-4 flex justify-between items-center h-14">
-      <div>
+      <div className="flex">
         <Link className="text-primary uppercase font-bold text-xl" to="/">
           <House />
         </Link>
+        <nav className="ml-2">
+          <ul className="flex gap-2">
+            <li>
+              <Link to="/about">
+                <CircleHelp />
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact">
+                <CircleUserRound />
+              </Link>
+            </li>
+            <li>
+              <Link to="/Tasks/List">
+                <LayoutList />
+              </Link>
+            </li>
+            <li>
+              <Link to="/create">
+                <FilePlus2 />
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <nav>
-        <ul className="flex gap-2">
-          <li>
-            <Link to="/about">
-              <CircleHelp />
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact">
-              <CircleUserRound />
-            </Link>
-          </li>
-          <li>
-            <Link to="/Tasks/List">
-              <LayoutList />
-            </Link>
-          </li>
-          <li>
-            <Link to="/create">
-              <FilePlus2 />
-            </Link>
-          </li>
-        </ul>
-      </nav>
+
+      <div>
+        <p>Taskify - Your ultimate task management tool</p>
+      </div>
 
       <div className="flex items-center gap-1">
         <DropdownMenu>

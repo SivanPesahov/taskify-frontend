@@ -12,11 +12,11 @@ import { Label } from "./ui/label";
 
 const TaskList = ({ tasks, isPinned }) => {
   return (
-    <ul>
+    <ul className="grid sm:grid-cols-3">
       {tasks.map((task) => {
         if (task.isPinned === isPinned) {
           return (
-            <li key={task._id}>
+            <li key={task._id} className="mx-2 ">
               <Link to={"/Tasks/List/" + task._id}>
                 <Card className="shadow-2xl my-4">
                   <CardHeader>

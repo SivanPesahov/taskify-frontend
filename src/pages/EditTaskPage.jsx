@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 
 export const EditTaskPage = () => {
   const { taskId } = useParams();
@@ -24,6 +25,7 @@ export const EditTaskPage = () => {
   const todoRef = useRef(null);
   const pinRef = useRef(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     async function getTask() {
@@ -95,11 +97,35 @@ export const EditTaskPage = () => {
       description: descriptionRef.current.value,
       body: contentRef.current.value,
     };
+    if (!valuesToChange.title) {
+      toast({
+        title: "Invalid input",
+        description: "Title is required.",
+        status: "error",
+        duration: 5000,
+      });
+      return;
+    }
+
     try {
       const { data } = await api.patch("task/edit/" + taskId, valuesToChange);
       setTask(data);
-      navigate("/Tasks/" + taskId);
+
+      toast({
+        title: "Success",
+        description: "Task edited successfully.",
+        status: "success",
+        duration: 5000,
+      });
+
+      navigate("/Tasks/List/" + taskId);
     } catch (err) {
+      toast({
+        title: "Error while editing",
+        description: "Something went wrong... please try again.",
+        status: "error",
+        duration: 5000,
+      });
       console.log(err);
     }
   }
