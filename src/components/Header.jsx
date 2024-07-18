@@ -2,7 +2,8 @@ import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
-// import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
@@ -80,7 +81,7 @@ function Header() {
             <DropdownMenuItem onClick={context.logout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* <ModeToggle /> */}
+        <ModeToggle />
       </div>
     </header>
   );

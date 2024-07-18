@@ -15,6 +15,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { getBackgroundColorClass } from "@/utils/taskColorFunc";
+import { CircleMinus } from "lucide-react";
 
 export const EditTaskPage = () => {
   const { taskId } = useParams();
@@ -23,7 +25,6 @@ export const EditTaskPage = () => {
   const descriptionRef = useRef(null);
   const contentRef = useRef(null);
   const todoRef = useRef(null);
-  const pinRef = useRef(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -130,9 +131,11 @@ export const EditTaskPage = () => {
     }
   }
 
+  const bgColorClass = getBackgroundColorClass(task.todoList);
+
   return (
     <>
-      <Card className="shadow-2xl">
+      <Card className={`shadow-2xl ${bgColorClass} text-black`}>
         <CardHeader>
           <div className="flex items-center space-x-2">
             <Switch id="pin-mode" onClick={handlePin} checked={task.isPinned} />
@@ -180,7 +183,7 @@ export const EditTaskPage = () => {
                             }}
                             className="h-7 mb-2 mr-2"
                           >
-                            Delete
+                            <CircleMinus />
                           </Button>
                         </div>
                       </div>

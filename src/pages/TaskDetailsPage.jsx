@@ -20,6 +20,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { useToast } from "@/components/ui/use-toast";
+import { getBackgroundColorClass } from "@/utils/taskColorFunc";
 
 export const TaskDetailsPage = () => {
   const { taskId } = useParams();
@@ -75,13 +76,15 @@ export const TaskDetailsPage = () => {
     navigate("/Tasks/List");
   };
 
+  const bgColorClass = getBackgroundColorClass(task.todoList);
+
   return (
     <>
       <Dialog open={true} onClose={handleClose}>
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
         <DialogContent>
-          <Card className="shadow-2xl">
+          <Card className={`shadow-2xl ${bgColorClass} text-black`}>
             <CardHeader>
               <CardTitle className="flex justify-between items-center">
                 <span>{task.title}</span>

@@ -65,53 +65,55 @@ function RegisterPage() {
   }
 
   return (
-    <Card className="shadow-2xl">
-      <CardHeader>
-        <CardTitle className="flex justify-between items-center">
-          <span>Register</span> <LogIn />
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form className="flex flex-col gap-4" onSubmit={handleRegister}>
-          <div>
-            <Label>Username:</Label>
-            <Input ref={usernameRef} placeholder="Enter username..." />
-          </div>
-          <div>
-            <Label>Password:</Label>
-            <Input
-              ref={passwordRef}
-              type="password"
-              placeholder="Enter password..."
-            />
-          </div>
-          <div>
-            <Label>First name:</Label>
-            <Input ref={firstNameRef} placeholder="Enter first name..." />
-          </div>
-          <div>
-            <Label>Last name:</Label>
-            <Input ref={lastNameRef} placeholder="Enter last name..." />
-          </div>
-          <div>
-            <Label>EMail:</Label>
-            <Input ref={eMailRef} placeholder="Enter last name..." />
-          </div>
+    <div className="flex justify-center items-center min-h-screen">
+      <Card className="shadow-2xl ">
+        <CardHeader>
+          <CardTitle className="flex justify-between items-center">
+            <span>Register</span> <LogIn />
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form className="flex flex-col gap-4" onSubmit={handleRegister}>
+            <div>
+              <Label>Username:</Label>
+              <Input ref={usernameRef} placeholder="Enter username..." />
+            </div>
+            <div>
+              <Label>Password:</Label>
+              <Input
+                ref={passwordRef}
+                type="password"
+                placeholder="Enter password..."
+              />
+            </div>
+            <div>
+              <Label>First name:</Label>
+              <Input ref={firstNameRef} placeholder="Enter first name..." />
+            </div>
+            <div>
+              <Label>Last name:</Label>
+              <Input ref={lastNameRef} placeholder="Enter last name..." />
+            </div>
+            <div>
+              <Label>EMail:</Label>
+              <Input ref={eMailRef} placeholder="Enter last name..." />
+            </div>
 
-          <Button type="submit" className="bg-sky-900">
-            Register
-          </Button>
-        </form>
-      </CardContent>
-      <CardFooter>
-        <p className="text-xs">
-          Already have an account?{" "}
-          <Link className="underline font-bold text-sky-900" to="/auth/login">
-            Login
-          </Link>
-        </p>
-      </CardFooter>
-    </Card>
+            <Button type="submit" className="bg-sky-900">
+              Register
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter>
+          <p className="text-xs">
+            Already have an account?{" "}
+            <Link className="underline font-bold text-sky-900" to="/auth/login">
+              Login
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }
 
